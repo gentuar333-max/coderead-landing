@@ -178,7 +178,7 @@
 <section class="hero">
   <div class="hero-left">
     <div class="kicker">AI Codebase Understanding &mdash; Early Access</div>
-    <h1>Any codebase.<br><em>Understood</em><br><strong>in 30 seconds.</strong></h1>
+    <h1>Understand 200,000 lines of code<br><em>in the time it takes</em><br><strong>to make coffee.</strong></h1>
 
     <ul class="value-list">
       <li>Paste a GitHub URL — get <strong>architecture, patterns, security flags, and improvements</strong></li>
@@ -344,8 +344,26 @@ function submitForm(which){
   const els=[...document.querySelectorAll('.js-count')];
   animateNum(prev,now,els);els.forEach(flash);
   if(now>prev)addAvatar();
-  if(which==='hero'){document.getElementById('heroForm').style.display='none';document.getElementById('heroSuccess').style.display='block'}
-  if(which==='bottom'){document.getElementById('bottomForm').style.display='none';document.getElementById('bottomSuccess').style.display='block'}
+
+  const shareUrl=encodeURIComponent(window.location.href);
+  const shareText=encodeURIComponent('New codebase on Monday? Understood by Tuesday. AI-powered codebase analysis — no install, no setup:');
+  const twitterUrl=`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`;
+  const successHtml=`
+    <div style="margin-bottom:0.5rem">You are <strong style="color:var(--hi)">#${now}</strong> on the waitlist — we will email you this week.</div>
+    <div style="font-size:0.82rem;color:var(--ink2);margin-bottom:0.8rem">Share with a dev friend and move up the list.</div>
+    <a href="${twitterUrl}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;background:var(--hi);color:#fff;border-radius:4px;font-size:0.78rem;font-weight:600;text-decoration:none">Share on X &rarr;</a>
+  `;
+
+  if(which==='hero'){
+    document.getElementById('heroForm').style.display='none';
+    document.getElementById('heroSuccess').innerHTML=successHtml;
+    document.getElementById('heroSuccess').style.display='block';
+  }
+  if(which==='bottom'){
+    document.getElementById('bottomForm').style.display='none';
+    document.getElementById('bottomSuccess').innerHTML=successHtml;
+    document.getElementById('bottomSuccess').style.display='block';
+  }
 }
 
 document.getElementById('heroEmail').addEventListener('keydown',e=>{if(e.key==='Enter')submitForm('hero')});
