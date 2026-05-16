@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google-site-verification" content="Q2orE230Gi2rl-5emUjDVGc50zqpw5v6wS3ZvHa2Izk" />
 
 <!-- Primary SEO -->
 <title>Coderead — Understand Any Codebase in 30 Seconds with AI</title>
@@ -341,18 +340,25 @@ function submitForm(which){
     input.style.outline='2px solid rgba(232,93,36,0.55)';
     setTimeout(()=>input.style.outline='',1600);return;
   }
+
+  fetch('https://formspree.io/f/mzdwppan',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({email:email})
+  });
+
   const prev=total();save(email);const now=total();
   const els=[...document.querySelectorAll('.js-count')];
   animateNum(prev,now,els);els.forEach(flash);
   if(now>prev)addAvatar();
 
   const shareUrl=encodeURIComponent(window.location.href);
-  const shareText=encodeURIComponent('New codebase on Monday? Understood by Tuesday. AI-powered codebase analysis — no install, no setup:');
+  const shareText=encodeURIComponent('Understand 200,000 lines of code in the time it takes to make coffee:');
   const twitterUrl=`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`;
   const successHtml=`
     <div style="margin-bottom:0.5rem">You are <strong style="color:var(--hi)">#${now}</strong> on the waitlist — we will email you this week.</div>
     <div style="font-size:0.82rem;color:var(--ink2);margin-bottom:0.8rem">Share with a dev friend and move up the list.</div>
-    <a href="${twitterUrl}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;background:var(--hi);color:#fff;border-radius:4px;font-size:0.78rem;font-weight:600;text-decoration:none">Share on X &rarr;</a>
+    <a href="${twitterUrl}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;background:var(--hi);color:#fff;border-radius:4px;font-size:0.78rem;font-weight:600;text-decoration:none">Share on X →</a>
   `;
 
   if(which==='hero'){
